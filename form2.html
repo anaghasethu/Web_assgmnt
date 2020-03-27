@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<style>
+table,th,td {
+  border : 1px solid black;
+  border-collapse: collapse;
+}
+th,td {
+  padding: 5px;
+}
+.center {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 150px;
+  height: 20px;
+  border: 1px solid black;
+  padding-top: 50px;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-bottom: 50px;
+  background-color: #ffffe6;
+  
+}
+.div{
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -200px;
+}
+</style>
+<body>
+<div class="center">
+<button type="button" onclick="loadXMLDoc()">Get the details</button>
+</div>
+<br><br>
+<div class="div">
+<table id="demo"></table>
+
+<script>
+function loadXMLDoc() {
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      myFunction(this);
+    }
+  };
+  xmlhttp.open("GET", "/home/anagha/project/cd_catalog.xml", true);
+  xmlhttp.send();
+}
+function myFunction(xml) {
+  var i;
+  var xmlDoc = xml.responseXML;
+  var table="<tr><th>name</th><th>address</th></tr>";
+  var x = xmlDoc.getElementsByTagName("cd");
+  for (i = 0; i <x.length; i++) {
+    table += "<tr><td>" +
+    x[i].getElementsByTagName("name")[0].childNodes[0].nodeValue +
+   "</td><td>" +
+    x[i].getElementsByTagName("address")[0].childNodes[0].nodeValue +
+    "</td></tr>";
+  }
+  document.getElementById("demo").innerHTML = table;
+}
+</script>
+</div>
+</body>
+</html>
+

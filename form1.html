@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>details</title>
+  </head>
+  <style>
+.center {
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -100px;
+  margin-left: -200px;
+  border: 1px solid black;
+ 
+  padding-top: 50px;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 80px;
+}
+</style>
+<script type="text/javascript">
+var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+var fso = new ActiveXObject("Scripting.FileSystemObject");
+var FILENAME = '
+cd_catalog.xml';
+
+function SaveXMLData() {
+var file = fso.CreateTextFile('cd_catalog.xml', true);
+file.WriteLine('<!--?xmlversion="1.0" encoding="utf-8" ?-->\n'); file.WriteLine('<CATALOG>\n');
+
+file.Write(' <cd ');
+file.Write('Name="' + document.getElementById('name').value + '" ');
+file.Write('Address="' + document.getElementById('address').value + '" ');
+file.WriteLine('></cd>\n');
+
+file.WriteLine('</CATALOG>\n');
+file.Close();
+}
+</script>
+  <body>
+    <div class="center">
+      Name: <input type="text" name="name" id="name"> <br>
+      Address: <input type="text" name="address" id="address" /> <br><br>
+     
+      <input type=button onClick="parent.location='form2.html'" value='submit'>
+
+    </div>
+    
+  </body>
+</html>
+
